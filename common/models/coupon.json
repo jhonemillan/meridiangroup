@@ -14,8 +14,16 @@
       "type": "string",
       "required": true
     },
-    "daysAvailable": {
+    "discount": {
       "type": "number",
+      "required": true
+    },
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "endDate": {
+      "type": "date",
       "required": true
     },
     "createdAt": {
@@ -42,6 +50,12 @@
       "principalType": "ROLE",
       "principalId": "customer",
       "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}

@@ -1,29 +1,26 @@
 {
-  "name": "product",
+  "name": "compra",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
-      "type": "string",
+    "Fecha": {
+      "type": "date",
       "required": true
     },
-    "description": {
-      "type": "string",
-      "required": true
-    },
-    "category": {
-      "type": "string",
-      "required": true
-    },
-    "price": {
+    "total": {
       "type": "number",
       "required": true
     },
-    "createdAt": {
-      "type": "date",
+    "coupon": {
+      "type": "string"
+    },
+    "productos": {
+      "type": [
+        "object"
+      ],
       "required": true
     }
   },
@@ -31,27 +28,21 @@
   "relations": {},
   "acls": [
     {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "DENY"
-    },
-    {
       "accessType": "WRITE",
       "principalType": "ROLE",
       "principalId": "customer",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "admin",
       "permission": "ALLOW"
     },
     {
       "accessType": "READ",
       "principalType": "ROLE",
       "principalId": "customer",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
       "permission": "ALLOW"
     }
   ],

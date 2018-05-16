@@ -33,13 +33,17 @@
   },
   "Role": {
     "dataSource": "db",
-    "public": false
+    "public": true
   },
   "product": {
     "dataSource": "db",
     "public": true
   },
   "coupon": {
+    "dataSource": "db",
+    "public": true
+  },
+  "compra": {
     "dataSource": "db",
     "public": true
   }
