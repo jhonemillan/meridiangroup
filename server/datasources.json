@@ -1,0 +1,12 @@
+{
+  "db": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "",
+    "database": "coupons",
+    "password": "",
+    "name": "couponDB",
+    "user": "",
+    "connector": "mongodb"
+  }
+}
