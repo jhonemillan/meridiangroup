@@ -5,7 +5,7 @@
     "url": "",
     "database": "coupons",
     "password": "",
-    "name": "couponDB",
+    "name": "db",
     "user": "",
     "connector": "mongodb"
   }
