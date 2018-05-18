@@ -3,27 +3,21 @@ let Role = app.models.Role;
 let User = app.models.User;
 let RoleMapping = app.models.RoleMapping;
 
-Role.findOrCreate({"name": "admin"});
-Role.findOrCreate({"name": "customer"});
+Role.findOrCreate({name: "admin"});
+Role.findOrCreate({name: "customer"});
 
-User.find({"email": "jhonemillan@gmail.com"}).then((user)=>{
-
-    if(!user){
-        console.log(user);
-        User.create({"email": "jhonemillan@gmail.com", "password":"devel"}).then((newuser)=>{
-            Role.find({"name": "admin"}).then((role)=>{
-                role.principals.create({principalType: RoleMapping.USER,  principalId: newuser.id}).then(()=>{console.log("rol assigned")}).catch((err)=>{ throw err;})
-            });        
-        });
-    }
-
-    // Role.find({"name": "admin"}).then((role)=>{
-    //     if (role) {
-    //         role.principals.create({principalType: RoleMapping.USER,  principalId: user.id}).then(()=>{console.log("rol assigned")}).catch((err)=>{ throw err;})
-    //     }
-
-    // }).catch((err)=>{console.log(err)});
-
-}).catch((err)=>{throw err;});
+User.find({"email": "jhonemillan@gmail.com"},function(err, obj){    
+        if(!obj.length){
+            console.log('user no existe');
+            User.create({"email": "jhonemillan@gmail.com", "password":"devel"}, function(err, newuser){
+                Role.find({where: {name: "admin"}}, function(err, role){                    
+                    RoleMapping.create({principalType: RoleMapping.USER,  principalId: newuser.id, roleId: role.id}, (err, obj)=>{
+                        if(err) throw err;
+                        console.log(obj);
+                    })
+                });                
+            });
+        }
+});
 
 }
