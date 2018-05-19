@@ -23,4 +23,10 @@ export class DataService {
    return this.http.post(this.apiUrl + '/products', product, {headers: this.headers});
   }
 
+  getProducts(): Observable<Product[]> {
+    console.log('entra');
+    console.log('this us ' + this.auth.getToken());
+    return this.http.get<Product[]>(this.apiUrl + '/products?access_token=' + this.auth.getToken(), {headers: this.headers});
+  }
+
 }

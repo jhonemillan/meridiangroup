@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { Product } from './../../model/product';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
@@ -13,11 +14,12 @@ import { DatePipe } from '@angular/common';
 })
 export class ProductComponent implements OnInit {
   product: Product = {};
+  products: Observable<Product[]>;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.saveProduct();
+    this.getProducts();
   }
 
   saveProduct() {
@@ -27,8 +29,12 @@ export class ProductComponent implements OnInit {
     this.data.saveProduct(this.product).subscribe(data => {
       console.log('se crea el producto');
       this.product = {};
+      this.getProducts();
     });
+  }
 
+  getProducts() {
+    this.products = this.data.getProducts();
   }
 
 }

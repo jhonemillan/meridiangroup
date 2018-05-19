@@ -1,6 +1,7 @@
 import { AuthService } from './services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { RouterModule, Routes, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
   title = 'app';
   isLoggedIn$: Observable<boolean>;
   isEnable =  false;
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 
@@ -25,8 +26,8 @@ export class AppComponent {
 
   onLogoutClick() {
     this.authService.logout().subscribe(res => {
-
-      console.log(res);
+      this.authService.logOutAuth();
+      this.router.navigate(['/login']);
     });
   }
 }

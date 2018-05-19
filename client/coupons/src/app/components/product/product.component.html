@@ -29,7 +29,32 @@
       <input  id="description" [(ngModel)]="product.description" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Description" required>
       
       <button class="btn btn-lg btn-primary btn-block" type="submit">Guardar</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+      
     </form>
+
+    <br>
+    <table class="ui compact celled definition table">
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Inactive</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products | async">
+          <td>{{p.name}}</td>
+          <td>{{p.description}}</td>
+          <td>{{p.category}}</td>
+          <td>{{p.price}}</td>
+          <td>{{p.inactive}}</td>
+          <td><button type="button" class="btn btn-warning">Inactivar</button></td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>

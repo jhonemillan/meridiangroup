@@ -32,7 +32,7 @@ export class AuthService {
   logout(): Observable<any> {
 
     const url = this.apiUrl + '/Users/logout';
-    const data = {accessTokenId: this.getToken()};
+    const data = {access_token: this.getToken()};
     return this.http.post(url, data, {headers: this.headers});
   }
 
