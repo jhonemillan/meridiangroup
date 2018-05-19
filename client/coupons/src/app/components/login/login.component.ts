@@ -1,7 +1,7 @@
 import { AuthService } from './../../services/auth.service';
 import { User } from './../../model/user';
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  user = new User();
+  user: User = {};
 
   constructor(
     private authService: AuthService,
@@ -19,24 +19,22 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authService.setLoggedOn(); 
+
   }
 
   onLogin() {
-    
-    let user = this.user;
+    const user = this.user;
     this.authService.login(user).subscribe(response => {
-
-      console.log(response);      
-      
-      let token = response.id;
+      const token = response.id;
       this.authService.setToken(token);
-      this.authService.setLoggedOn();            
+      this.authService.setLoggedOn(true);
       this.router.navigate(['/product']);
     }, err => {
 
       console.log(err);
-    })
+    });
+
+    this.authService.getTheBoolean().subscribe(value => console.log(value));
 
   }
 }

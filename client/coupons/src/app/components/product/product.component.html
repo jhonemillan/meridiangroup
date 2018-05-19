@@ -1,3 +1,35 @@
-<p>
-  product works!
-</p>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+
+    <title>Productos</title>
+
+    
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" (ngSubmit)="saveProduct()">      
+      <h1 class="h3 mb-3 font-weight-normal">Productos</h1>
+      <label for="nombre" class="sr-only">Nombre</label>
+      <input type="email" id="nombre" [(ngModel)]="product.name" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Nombre Producto" required autofocus>
+      
+      <label for="categoria" class="sr-only">Categoria</label>
+      <input id="categoria" [(ngModel)]="product.category" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Categoria" required>
+      
+      <label for="categoria" class="sr-only">Precio</label>
+      <input type="number" id="precio" [(ngModel)]="product.price" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Precio" required>
+      
+      <label for="description" class="sr-only">Description</label>
+      <input  id="description" [(ngModel)]="product.description" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Description" required>
+      
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Guardar</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+  </body>
+</html>

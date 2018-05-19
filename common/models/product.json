@@ -25,6 +25,10 @@
     "createdAt": {
       "type": "date",
       "required": true
+    },
+    "inactive": {
+      "type": "boolean",
+      "required": true
     }
   },
   "validations": [],

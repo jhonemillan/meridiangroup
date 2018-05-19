@@ -11,19 +11,23 @@ import { Observable } from 'rxjs/Observable';
 export class AppComponent {
   title = 'app';
   isLoggedIn$: Observable<boolean>;
+  isEnable =  false;
+  constructor(private authService: AuthService) {
 
-  constructor(private authService: AuthService) {}
+  }
 
-   ngOnInit(){
-    this.isLoggedIn$ = this.authService.isLoggedUser;
-    console.log(this.authService.isLoggedUser);
+   OnInit() {
    }
 
-  onLogoutClick(){
+   enabled() {
+    this.authService.isLoggedUser.subscribe(data => this.isEnable = data);
+   }
+
+  onLogoutClick() {
     this.authService.logout().subscribe(res => {
-      this.authService.setLoggedOff();
+
       console.log(res);
-    })
+    });
   }
 }
 

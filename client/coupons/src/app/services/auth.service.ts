@@ -8,68 +8,66 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class AuthService {
 
-  apiUrl = "http://localhost:3000/api"
+  apiUrl = 'http://localhost:3000/api';
 
   headers = new HttpHeaders({
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
     'Authorization': this.getToken(),
   });
 
-  public loggedIn = new BehaviorSubject<boolean>(false);
+  private loggedIn = new BehaviorSubject<boolean>(false);
+  isLogged = this.loggedIn.asObservable();
 
   public onAuthChange$: Subject<User>;
 
 
-  constructor(private http:HttpClient) { 
-    this.onAuthChange$ = new Subject();    
+  constructor(private http: HttpClient) {
+    this.onAuthChange$ = new Subject();
   }
 
-  login(user: User): Observable<any>{
-    return this.http.post(this.apiUrl + '/Users/login',user);
+  login(user: User): Observable<any> {
+    return this.http.post(this.apiUrl + '/Users/login', user);
   }
 
-  logout(): Observable<any>{
+  logout(): Observable<any> {
 
-    let url = this.apiUrl + '/Users/logout';
-    let data = {accessTokenId: this.getToken()};
-    return this.http.post(url, data, {headers: this.headers})
+    const url = this.apiUrl + '/Users/logout';
+    const data = {accessTokenId: this.getToken()};
+    return this.http.post(url, data, {headers: this.headers});
   }
 
   setToken(token: string) {
 
-    localStorage.setItem("accessToken", token);
+    localStorage.setItem('accessToken', token);
   }
 
   getToken(): string {
-    return localStorage.getItem("accessToken");
+    return localStorage.getItem('accessToken');
   }
 
   setUser(user: User) {
     this.onAuthChange$.next(user);
-    let userString = JSON.stringify(user);
-    localStorage.setItem("currentUser", userString);
+    const userString = JSON.stringify(user);
+    localStorage.setItem('currentUser', userString);
 
   }
 
-  setLoggedOn(){
-    this.loggedIn.next(true);
-    console.log('set en true');
+  setLoggedOn(option: boolean): void {
+    this.loggedIn.next(option);
   }
 
-  
-  setLoggedOff(){
-    this.loggedIn.next(false);
-  }
-
-
-  get isLoggedUser(){  
+  get isLoggedUser() {
     return this.loggedIn.asObservable();
   }
 
-  logOutAuth(){
-    this.onAuthChange$.next(null);    
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("accessToken");
+  public getTheBoolean(): Observable<boolean> {
+    return this.loggedIn.asObservable();
+}
+
+  logOutAuth() {
+    this.onAuthChange$.next(null);
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('accessToken');
   }
 
 
