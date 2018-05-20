@@ -28,14 +28,15 @@ export class LoginComponent implements OnInit {
       console.log(response);
       const token = response.id;
       this.authService.setToken(token);
+      this.authService.setUser(user);
       this.authService.setLoggedOn(true);
-      this.router.navigate(['/product']);
+      this.router.navigate(['/']);
     }, err => {
 
       console.log(err);
     });
 
-    this.authService.getTheBoolean().subscribe(value => console.log(value));
+
 
   }
 }

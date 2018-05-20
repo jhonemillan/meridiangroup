@@ -12,16 +12,18 @@ import { RouterModule, Routes, Router } from '@angular/router';
 export class AppComponent {
   title = 'app';
   isLoggedIn$: Observable<boolean>;
-  isEnable =  false;
+  isEnable = false;
+
   constructor(private authService: AuthService, private router: Router) {
 
   }
 
    OnInit() {
+
    }
 
    enabled() {
-    this.authService.isLoggedUser.subscribe(data => this.isEnable = data);
+    return this.authService.isAdmin();
    }
 
   onLogoutClick() {

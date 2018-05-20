@@ -1,3 +1,61 @@
-<p>
-  coupon works!
-</p>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+
+    <title>Coupons</title>
+
+    
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" (ngSubmit)="saveCoupon()">      
+      <h1 class="h3 mb-3 font-weight-normal">Coupons</h1>
+      <label for="nombre" class="sr-only">Code</label>
+      <input id="nombre" [(ngModel)]="coupon.code" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Code" required autofocus>
+      
+      <label for="discount" class="sr-only">Discount</label>
+      <input type="number" id="discount" [(ngModel)]="coupon.discount" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Discount" required>
+      
+      <label for="start" class="sr-only">Start Date</label>
+      <input type="date"  id="start" [(ngModel)]="coupon.startDate" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Start Date" required>
+      
+      <label for="end" class="sr-only">Start End</label>
+      <input type="date"  id="end" [(ngModel)]="coupon.endDate" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="End Date" required>
+      
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Guardar</button>
+      
+    </form>
+
+    <br>
+    <table class="ui compact celled definition table">
+      <thead>
+        <tr>
+          
+          <th>Code</th>
+          <th>Discount</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Inactive</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of coupons | async">
+          <td>{{p.code}}</td>
+          <td>{{p.discount}}</td>
+          <td>{{p.startDate | date:'mediumDate'}}</td>
+          <td>{{p.endDate | date:'mediumDate'}}</td>
+          <td>{{p.inactive}}</td>
+          <td><button type="button" class="btn btn-warning" (click)="inactiveCoupon(p.id)">Inactivar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

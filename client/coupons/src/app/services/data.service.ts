@@ -1,3 +1,4 @@
+import { Coupon } from './../model/coupon';
 import { AuthService } from './auth.service';
 import { Product } from './../model/product';
 import { Injectable } from '@angular/core';
@@ -26,12 +27,24 @@ export class DataService {
    return this.http.post(this.apiUrl + '/products', product, {headers: this.headers});
   }
 
+  saveCoupon(coupon: Coupon): Observable<any> {
+    return this.http.post(this.apiUrl + '/coupons?access_token=' + this.auth.getToken(), coupon, {headers: this.headers});
+  }
+
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl + '/products?access_token=' + this.auth.getToken(), {headers: this.headers});
   }
 
+  getCoupons(): Observable<Coupon[]> {
+    return this.http.get<Coupon[]>(this.apiUrl + '/coupons?access_token=' + this.auth.getToken(), {headers: this.headers});
+  }
+
   inactiveProduct(id): Observable<any> {
     return this.http.delete(this.apiUrl + '/products/' + id, {params: this.params});
+  }
+
+  inactiveCoupon(id): Observable<any> {
+    return this.http.delete(this.apiUrl + '/coupons/' + id, {params: this.params});
   }
 
 }

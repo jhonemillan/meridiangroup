@@ -1,6 +1,6 @@
 import { User } from './../model/user';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -14,6 +14,9 @@ export class AuthService {
     'Content-Type': 'application/json',
     'Authorization': this.getToken(),
   });
+
+  params = new HttpParams()
+  .set('access_token', this.getToken());
 
   private loggedIn = new BehaviorSubject<boolean>(false);
   isLogged = this.loggedIn.asObservable();
@@ -31,9 +34,9 @@ export class AuthService {
 
   logout(): Observable<any> {
 
-    const url = this.apiUrl + '/Users/logout';
-    const data = {access_token: this.getToken()};
-    return this.http.post(url, data, {headers: this.headers});
+    const url = this.apiUrl + '/Users/logout?access_token=' + this.getToken();
+    console.log(this.params);
+    return this.http.post(url, {headers: this.headers});
   }
 
   setToken(token: string) {
@@ -47,8 +50,7 @@ export class AuthService {
 
   setUser(user: User) {
     this.onAuthChange$.next(user);
-    const userString = JSON.stringify(user);
-    localStorage.setItem('currentUser', userString);
+    localStorage.setItem('currentUser', user.email);
 
   }
 
@@ -65,9 +67,14 @@ export class AuthService {
 }
 
   logOutAuth() {
-    this.onAuthChange$.next(null);
+
     localStorage.removeItem('currentUser');
     localStorage.removeItem('accessToken');
+  }
+
+  isAdmin() {
+    console.log(localStorage.getItem('currentUser') === 'jhonemillan@gmail.com');
+    return localStorage.getItem('currentUser') === 'jhonemillan@gmail.com';
   }
 
 

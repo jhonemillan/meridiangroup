@@ -5,11 +5,7 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {
-    "description": {
-      "type": "string",
-      "required": true
-    },
+  "properties": {    
     "code": {
       "type": "string",
       "required": true

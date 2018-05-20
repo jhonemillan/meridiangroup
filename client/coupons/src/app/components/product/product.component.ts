@@ -3,22 +3,27 @@ import { Product } from './../../model/product';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { DatePipe } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
-  providers: [DataService]
+  providers: [DataService, AuthService]
 
 })
 export class ProductComponent implements OnInit {
   product: Product = {};
   products: Observable<Product[]>;
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    if (!this.auth.isAdmin()) {
+      this.router.navigate(['/notfound']);
+    }
     this.getProducts();
   }
 
@@ -38,7 +43,6 @@ export class ProductComponent implements OnInit {
   }
 
   inactiveProduct(id) {
-    console.log(id);
     this.data.inactiveProduct(id).subscribe(data => {
       console.log(data);
     });
