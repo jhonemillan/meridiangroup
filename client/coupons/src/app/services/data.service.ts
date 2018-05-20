@@ -1,7 +1,7 @@
 import { AuthService } from './auth.service';
 import { Product } from './../model/product';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -16,6 +16,9 @@ export class DataService {
     'Authorization': this.auth.getToken(),
   });
 
+   params = new HttpParams()
+  .set('access_token', this.auth.getToken());
+
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
@@ -24,9 +27,11 @@ export class DataService {
   }
 
   getProducts(): Observable<Product[]> {
-    console.log('entra');
-    console.log('this us ' + this.auth.getToken());
     return this.http.get<Product[]>(this.apiUrl + '/products?access_token=' + this.auth.getToken(), {headers: this.headers});
+  }
+
+  inactiveProduct(id): Observable<any> {
+    return this.http.delete(this.apiUrl + '/products/' + id, {params: this.params});
   }
 
 }

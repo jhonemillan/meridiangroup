@@ -1,5 +1,6 @@
-module.exports = function(app){
+module.exports = function(app, cb){
 let Role = app.models.Role;
+let Product = app.models.Product;
 let User = app.models.User;
 let RoleMapping = app.models.RoleMapping;
 
@@ -24,4 +25,5 @@ User.find({"email": "jhonemillan@gmail.com"},function(err, obj){
         }
 });
 
+process.nextTick(cb);
 }

@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   onLogin() {
     const user = this.user;
     this.authService.login(user).subscribe(response => {
+      console.log(response);
       const token = response.id;
       this.authService.setToken(token);
       this.authService.setLoggedOn(true);

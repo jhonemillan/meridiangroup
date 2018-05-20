@@ -52,7 +52,7 @@
           <td>{{p.category}}</td>
           <td>{{p.price}}</td>
           <td>{{p.inactive}}</td>
-          <td><button type="button" class="btn btn-warning">Inactivar</button></td>
+          <td><button type="button" class="btn btn-warning" (click)="inactiveProduct(p.id)">Inactivar</button></td>
         </tr>
       </tbody>
     </table>

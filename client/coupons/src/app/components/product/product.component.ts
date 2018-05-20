@@ -37,4 +37,12 @@ export class ProductComponent implements OnInit {
     this.products = this.data.getProducts();
   }
 
+  inactiveProduct(id) {
+    console.log(id);
+    this.data.inactiveProduct(id).subscribe(data => {
+      console.log(data);
+    });
+    this.getProducts();
+  }
+
 }
