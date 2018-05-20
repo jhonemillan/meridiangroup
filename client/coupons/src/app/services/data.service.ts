@@ -1,3 +1,4 @@
+import { Compra } from './../model/compra';
 import { Coupon } from './../model/coupon';
 import { AuthService } from './auth.service';
 import { Product } from './../model/product';
@@ -31,8 +32,16 @@ export class DataService {
     return this.http.post(this.apiUrl + '/coupons?access_token=' + this.auth.getToken(), coupon, {headers: this.headers});
   }
 
+  saveCompra(compra: Compra): Observable<any> {
+    return this.http.post(this.apiUrl + '/compras?access_token=' + this.auth.getToken(), compra, {headers: this.headers});
+  }
+
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl + '/products?access_token=' + this.auth.getToken(), {headers: this.headers});
+  }
+
+  getProductsActive(): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:3000/api/products/active', {headers: this.headers});
   }
 
   getCoupons(): Observable<Coupon[]> {

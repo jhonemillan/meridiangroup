@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "properties": {
-    "Fecha": {
+    "fecha": {
       "type": "date",
       "required": true
     },
@@ -16,12 +16,6 @@
     },
     "coupon": {
       "type": "string"
-    },
-    "productos": {
-      "type": [
-        "object"
-      ],
-      "required": true
     }
   },
   "validations": [],

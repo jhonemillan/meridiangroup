@@ -1,3 +1,70 @@
-<p>
-  shopping works!
-</p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+
+    <title>Productos</title>
+
+    
+  </head>
+
+  <body class="text-center">
+    <br>
+    <table class="ui compact celled definition table">
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Price</th>        
+          <th></th>  
+         
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products | async">
+          <td>{{p.name}}</td>
+          <td>{{p.description}}</td>
+          <td>{{p.category}}</td>
+          <td>{{p.price}}</td>          
+          
+          <td><button type="button" class="btn btn-sucess" (click)="agregar(p)">Agregar</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1>shopping car</h1>
+    <br>
+    <table class="ui compact celled definition table">
+      <thead>
+        <tr>
+          
+          <th>Name</th>         
+          <th>Price</th>
+          <th>qty</th>          
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of shoppingCar">
+          <td>{{p.name}}</td>
+          <td>{{p.price}}</td>
+          <td><input type="number" [(ngModel)]="p.qty" style="width: 50px"></td>
+          <td><button type="button" class="btn btn-sucess">Agregar</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br>
+
+    <button type="button" class="btn btn-sucess" (click)="calcular()">Calcular</button>
+    <h1>{{total}}</h1>
+
+    <button type="button" class="btn btn-sucess" (click)="comprar()">Comprar</button>
+  </body>
+</html>
